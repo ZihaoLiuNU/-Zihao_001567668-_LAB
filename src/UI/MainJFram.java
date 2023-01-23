@@ -289,10 +289,10 @@ public class MainJFram extends javax.swing.JFrame {
         String lastName = fieldLastName.getText();
         String collegeName = fieldCollegeName.getText();
         
-        String officePhone = fieldOfficePhone.getText();
+        long officePhone = Long.valueOf(fieldOfficePhone.getText());
         String officeEmail = fieldOfficeEmail.getText();
         
-        String personalPhone = fieldPersonalPhone.getText();
+        long personalPhone = Long.valueOf(fieldPersonalPhone.getText());
         String personalEmail = fieldPersonalEmail.getText();
         
         String permStreet = fieldPermanentStreet.getText();
@@ -311,7 +311,6 @@ public class MainJFram extends javax.swing.JFrame {
         this.person.setCollegeName(collegeName);
         
         ContactInformation officeContact = this.person.getOfficeContactInfo();
-        
         officeContact.setPhoneNumber(officePhone);
         officeContact.setEmailID(officeEmail);
         
@@ -359,10 +358,10 @@ public class MainJFram extends javax.swing.JFrame {
         viewName.setText(this.person.getFirstName() + " " + this.person.getLastName());
         viewCollegeName.setText(this.person.getCollegeName());
         
-        viewOfficePhone.setText(this.person.getOfficeContactInfo().getPhoneNumber());
+        viewOfficePhone.setText(String.valueOf(this.person.getOfficeContactInfo().getPhoneNumber()));
         viewOfficeEmail.setText(this.person.getOfficeContactInfo().getEmailID());
         
-        viewPersonalPhone.setText(this.person.getPersonalContactInfo().getPhoneNumber());
+        viewPersonalPhone.setText(String.valueOf(this.person.getPersonalContactInfo().getPhoneNumber()));
         viewPersonalEmail.setText(this.person.getPersonalContactInfo().getEmailID());
         
         viewPermanentStreet.setText(this.person.getPermAddress().getStreetName());

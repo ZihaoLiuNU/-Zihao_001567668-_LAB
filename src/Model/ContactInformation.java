@@ -9,19 +9,19 @@ package Model;
  * @author alilovepeach
  */
 public class ContactInformation {
-    String phoneNumber;
+    long phoneNumber;
     String emailID;
     
     public ContactInformation(){
-        this.phoneNumber = "";
+        this.phoneNumber = 0;
         this.emailID = "";
     }
     
-    public String getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

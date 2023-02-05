@@ -5,6 +5,7 @@
 package UI;
 
 import Model.Application;
+import Model.Medicine;
 import Model.Observation;
 import Model.VitalSignHistory;
 import javax.swing.JOptionPane;
@@ -58,6 +59,7 @@ public class ViewJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         observationTable = new javax.swing.JTable();
         viewObservationBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 255, 204));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,6 +116,14 @@ public class ViewJPanel extends javax.swing.JPanel {
             }
         });
         add(viewObservationBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 370, -1, -1));
+
+        jButton1.setText("DELETE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 370, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void updateObservationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateObservationBtnActionPerformed
@@ -158,6 +168,24 @@ public class ViewJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_viewObservationBtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                                            
+        // TODO add your handling code here:
+        int selectedRow = observationTable.getSelectedRow();
+        if(selectedRow >= 0){
+            //delete the object
+            
+            Observation o = (Observation) observationTable.getValueAt(selectedRow, 0);
+            
+            this.application.getHistory().removeVitalSignHistory(o.getObservationID());
+            
+            displayObservations();
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select a row!");
+        }
+    
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public void displayObservations() {
         VitalSignHistory history = this.application.getHistory();
 
@@ -184,6 +212,7 @@ public class ViewJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField fieldBP;
     private javax.swing.JTextField fieldObservationId;
     private javax.swing.JTextField fieldTemperature1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -23,6 +23,7 @@ public class CatalogJPanel extends javax.swing.JPanel {
     
     private Application application;
     DefaultTableModel medTableModel;
+    Medicine selectedMedicine;
     
     public CatalogJPanel() {
         initComponents();
@@ -54,6 +55,8 @@ public class CatalogJPanel extends javax.swing.JPanel {
         deleteBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        viewMedicineBtn = new javax.swing.JButton();
+        updateMedicineBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -111,13 +114,29 @@ public class CatalogJPanel extends javax.swing.JPanel {
                 deleteBtnActionPerformed(evt);
             }
         });
-        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, -1, -1));
+        add(deleteBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 370, -1, -1));
 
         jLabel1.setText("Name");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         jLabel2.setText("Dosage");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
+
+        viewMedicineBtn.setText("View Details");
+        viewMedicineBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewMedicineBtnActionPerformed(evt);
+            }
+        });
+        add(viewMedicineBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
+
+        updateMedicineBtn.setText("Update Medicine");
+        updateMedicineBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateMedicineBtnActionPerformed(evt);
+            }
+        });
+        add(updateMedicineBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void fieldNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNameActionPerformed
@@ -174,6 +193,45 @@ public class CatalogJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_deleteBtnActionPerformed
 
+    private void viewMedicineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewMedicineBtnActionPerformed
+        // TODO add your handling code here:
+
+        // what was clicked? get the row in the table that was clicked
+        int selectedRow = medicineCatalog.getSelectedRow();
+
+        if (selectedRow >= 0) {
+
+            // we can directly fentch the Observation object from the Zeroth position
+            this.selectedMedicine = (Medicine) medicineCatalog.getValueAt(selectedRow, 0);
+
+            // fill all the text fields
+            fieldName.setText(String.valueOf(selectedMedicine.getMedicineName()));
+            fieldDosage.setText(String.valueOf(selectedMedicine.getDosage()));
+        } else {
+            // no selection made by the user
+
+            JOptionPane.showMessageDialog(null, "Please select a row!");
+        }
+    }//GEN-LAST:event_viewMedicineBtnActionPerformed
+
+    private void updateMedicineBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMedicineBtnActionPerformed
+        // TODO add your handling code here:
+
+        // update the observation object
+        if (!fieldName.getText().isEmpty()) {
+            // call the findMed method
+            Medicine med = this.application.getCatalog().findMedicine(fieldName.getText());
+            med.setMedicineName(fieldName.getText());
+            med.setDosage(Double.valueOf(fieldDosage.getText()));
+            // or
+
+            //use the selectedObservation member we defined at the top of this class
+        } else {
+            JOptionPane.showMessageDialog(null, "You have not made any selection");
+        }
+        displayMedicineCatalog();
+    }//GEN-LAST:event_updateMedicineBtnActionPerformed
+
     
     public void displayMedicineCatalog(){
         // check if the catalog is not empty
@@ -191,8 +249,11 @@ public class CatalogJPanel extends javax.swing.JPanel {
                 
                 medTableModel.addRow(row);
             }
+        }else {
+            System.out.print("Empty List");
         }
     }
+        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addBtn;
@@ -203,5 +264,7 @@ public class CatalogJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable medicineCatalog;
+    private javax.swing.JButton updateMedicineBtn;
+    private javax.swing.JButton viewMedicineBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -56,4 +56,15 @@ public class VitalSignHistory {
         return true;
     }
     
+        
+    public void removeVitalSignHistory(int id) {
+        // find the medicine obj in the arraylist with this name
+        for (Observation o: this.vitalSignHistory) {
+            if(o.getObservationID() == id) {
+                this.vitalSignHistory.remove(id-1);
+                break;
+            }
+        }
+    }
+    
 }

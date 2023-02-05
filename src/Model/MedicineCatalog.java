@@ -35,6 +35,15 @@ public class MedicineCatalog {
         return medicine;
     }
     
+    public Medicine findMedicine(String name){
+        for(Medicine med: this.medicineList){
+            if(med.getMedicineName().equals(name)){
+               return med;
+            }
+        }
+        return null;
+    }
+    
     // check if medicine already exists
     
     public Boolean checkIfMedicineUnique(String name){
